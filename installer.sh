@@ -47,22 +47,23 @@ if [ ! $RESULT -eq 0 ]; then
 	wget ${GO_URL}
 	tar -C /usr/local -xvf ${GO_BINARY}
     rm -rf ${GO_BINARY}
-fi
 
+	FIND_GO=$(cat ~/.bashrc | grep "go/bin" | wc -l)
+	if [ ${FIND_GO} -eq 0 ]; then
+    	echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
+	fi
 
-FIND_GO=$(cat ~/.bashrc | grep "go/bin" | wc -l)
-if [ ${FIND_GO} -eq 0 ]; then
-	echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
-fi
+	FIND_GOPATH=$(cat ~/.bashrc | grep "GOPATH" | wc -l)
+	if [ ${FIND_GOPATH} -eq 0 ]; then
+    	echo 'export GOPATH=$(go env GOPATH)' >> ~/.bashrc
+	fi
 
-FIND_GOPATH=$(cat ~/.bashrc | grep "GOPATH" | wc -l)
-if [ ${FIND_GOPATH} -eq 0 ]; then
-	echo 'export GOPATH=$(go env GOPATH)' >> ~/.bashrc
-fi
-
-FIND_GOROOT=$(cat ~/.bashrc | grep "GOROOT" | wc -l)
-if [ ${FIND_GOROOT} -eq 0 ]; then
-	echo 'export GOROOT=/usr/local/go' >> ~/.bashrc
+	FIND_GOROOT=$(cat ~/.bashrc | grep "GOROOT" | wc -l)
+	if [ ${FIND_GOROOT} -eq 0 ]; then
+    	echo 'export GOROOT=/usr/local/go' >> ~/.bashrc
+	fi
+else
+	go get -v golang.org/x/tools/cmd/godoc
 fi
 
 
