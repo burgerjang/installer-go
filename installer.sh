@@ -65,5 +65,6 @@ if [ ${FIND_GOROOT} -eq 0 ]; then
 	echo 'export GOROOT=/usr/local/go' >> ~/.bashrc
 fi
 
+
 echo -e 'source ~/.bashrc'
 echo -e
