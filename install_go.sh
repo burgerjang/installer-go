@@ -17,8 +17,7 @@ command -v fzf
 if [ $? -eq 1 ]; then
 	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 	~/.fzf/install
-	source ~/.bashrc
-	FZF=true
+	exit 0
 else
 	FZF=true
 fi
@@ -47,23 +46,24 @@ if [ ! $RESULT -eq 0 ]; then
 	GO_BINARY=$(echo $GO_URL | awk -F'/' '{print $5}')
 	wget ${GO_URL}
 	tar -C /usr/local -xvf ${GO_BINARY}
+    rm -rf ${GO_BINARY}
 fi
 
 
-#FIND_GO=$(cat ~/.bashrc | grep "go/bin" | wc -l)
-#if [ ${FIND_GO} -eq 0 ]; then
-#	echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
-#fi
+FIND_GO=$(cat ~/.bashrc | grep "go/bin" | wc -l)
+if [ ${FIND_GO} -eq 0 ]; then
+	echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
+fi
 
-#FIND_GOPATH=$(cat ~/.bashrc | grep "GOPATH" | wc -l)
-#if [ ${FIND_GOPATH} -eq 0 ]; then
-#	echo 'export GOPATH=$(go env GOPATH)' >> ~/.bashrc
-#fi
+FIND_GOPATH=$(cat ~/.bashrc | grep "GOPATH" | wc -l)
+if [ ${FIND_GOPATH} -eq 0 ]; then
+	echo 'export GOPATH=$(go env GOPATH)' >> ~/.bashrc
+fi
 
-#FIND_GOROOT=$(cat ~/.bashrc | grep "GOROOT" | wc -l)
-#if [ ${FIND_GOROOT} -eq 0 ]; then
-#	echo 'export GOROOT=/usr/local/go' >> ~/.bashrc
-#fi
+FIND_GOROOT=$(cat ~/.bashrc | grep "GOROOT" | wc -l)
+if [ ${FIND_GOROOT} -eq 0 ]; then
+	echo 'export GOROOT=/usr/local/go' >> ~/.bashrc
+fi
 
-#echo -e 'source ~/.bashrc'
-##echo -e
+echo -e 'source ~/.bashrc'
+echo -e
