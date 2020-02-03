@@ -1,1 +1,3 @@
-![my badge](https://action-badges.now.sh/JasonEtco/action-badges?workflow=gopkg-nodejs)
+![Node CI](https://github.com/burgerjang/installer-go/workflows/Node%20CI/badge.svg?branch=master)
+
+This is for installing `golang`
